@@ -1,5 +1,5 @@
 // Acá empezando con el Rustito!
-use std::collections::HashSet;
+use std::collections::{HashSet, HashMap};
 
 fn main() {
     println!("Hola Rustito!!");
@@ -52,7 +52,21 @@ println!("{:?}", mi_lista);
 
 // Set
 let mut mi_set: HashSet<&str> = vec!["nahue", "dintal", "@nahue.dintal"].into_iter().collect();
+mi_set.insert("nahue");
 println!("{:?}", mi_set);
 
+// Set
+let mut mi_mapa: HashMap<&str, i32> = vec![("nahue", 36),("cata", 11),("pipita", 7)]
+    .into_iter()
+    .collect();
+mi_mapa.insert("florenchia", 32);
+println!("{:?}", mi_mapa);
+
+//Bucles
+for value: &str in mi_lista {
+    println!("{}", value)
 }
 
+
+}
+ 
