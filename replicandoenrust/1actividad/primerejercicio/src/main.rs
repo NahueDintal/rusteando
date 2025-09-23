@@ -1,34 +1,41 @@
-// hacer una calculadora de primedio
-// donde se ingresan las notas 
-// y se calcula el promedio de la mismas
-
 use std::io;
+use std::error::Error;
 
-fn main() {
-    println!("Ingrese numeros para calcular el promedio.");
-    println!("Numero 1");
-    let mut numero1 = String::new();
-    io::stdin().read_line(&mut numero1).expect("Error");
-    println!("Numero 2");
-    let mut numero2 = String::new();
-    io::stdin().read_line(&mut numero2).expect("Error");
-    println!("Numero 3");
-    let mut numero3 = String::new();
-    io::stdin().read_line(&mut numero3).expect("Error");
-    println!("Numero 4");
-    let mut numero4 = String::new();
-    io::stdin().read_line(&mut numero4).expect("Error");
+fn leer_numero(mensaje: &str) -> Result<f64, Box<dyn Error>> {
+    println!("{}", mensaje);
 
-    let numero1 = convertirNumero(&numero1);
+    let mut input = String::new();
+    io::stdin().read_line(&mut input)?;
 
-    println!("Numero 1: {:?}", numero1);
-    println!("Numero 2: {}", numero2);
-    println!("Numero 3: {}", numero3);
-    println!("Numero 4: {}", numero4);
+    let numero: f64 = input.trim().parse()?;
+    Ok(numero)
 }
-fn convertirNumero(texto: &str) -> Result<f64, String> {
-    match texto.trim().parse::<f64>() {
-        Ok(num) => Ok(num),
-        Err(e) => Err(format!("Error: {}", e))
+fn main() -> Result<(), Box<dyn Error>> {
+    println!(":: Calculadora de promedio");
+    println!(":: Ingrese 4 números:");
+
+    let mut numeros = Vec::new();
+
+    for i in 1..=4 {
+        let mensaje = format!(":: Números {}:", i);
+        loop {
+            match leer_numero(&mensaje) {
+                Ok(num) => {
+                    numeros.push(num);
+                    break;
+                },
+                Err(e) => {
+                    println!("Error: {}. Por favor, ingrese un número válido.", e);
+                }
+            }
+        }
     }
+    let suma: f64 = numeros.iter().sum();
+    let promedio = suma / numeros.len() as f64;
+
+    println!(":: Números ingresados: {:?}", numeros);
+    println!(":: Suma: {}", suma);
+    println!(":: Promedio: {:.2}", promedio);
+
+    Ok(())
 }
