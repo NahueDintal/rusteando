@@ -27,7 +27,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     Ok(())
 }
 fn leer_numero(mensaje: &str) -> Result<f64, Box<dyn Error>> {
-     print!("{}", mensaje);
+     println!("{}", mensaje);
 
      let mut input = String::new();
      io::stdin().read_line(&mut input)?;
