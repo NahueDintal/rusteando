@@ -1,7 +1,0 @@
-[package]
-name = "tasker"
-version = "0.1.0"
-edition = "2021"
-
-# No necesitamos dependencias por ahora
-[dependencies]
